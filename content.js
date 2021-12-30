@@ -20,7 +20,7 @@ window.addEventListener("load", function () {
             "justify-content": "center",
             "display":"-webkit-flex"
         });
-        //    button.css( "zIndex", 2147483647 )
+
         $('body').append(button);
         $('body').on('click', '#myGTTButton', gotoTop);
         $("#myGTTButton").hover(() => {

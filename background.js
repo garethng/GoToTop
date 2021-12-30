@@ -12,10 +12,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 chrome.runtime.onInstalled.addListener(function (details) {
   if (details.reason === "install") {
       setSettings({all: true})
-      chrome.contextMenus.create({
-        title: "Goto Top",
-        id: "gototop"
-      })
   } else if (details.reason === "update") {
       // When extension is updated
   } else if (details.reason === "browser_update") {
@@ -26,7 +22,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
   if (info.menuItemId == "gototop") {
-    chrome.tabs.sendMessage(tab.id,{cmd:"gototop"},function(res){})
+    chrome.tabs.sendMessage(tab.id, { cmd: "gototop" })
   }
 })
 
@@ -51,3 +47,12 @@ function setSettings(config,successHandler){
 function onError(error) {
   console.log(error)
 }
+
+function init() { 
+  chrome.contextMenus.create({
+    title: "Goto Top",
+    id: "gototop"
+  })
+}
+
+init()

@@ -11,7 +11,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 chrome.runtime.onInstalled.addListener(function (details) {
   if (details.reason === "install") {
-      // AppInsightInstance.trackEvent(AppInsightEvent.newInstall)
       setSettings({all: true})
       chrome.contextMenus.create({
         title: "Goto Top",

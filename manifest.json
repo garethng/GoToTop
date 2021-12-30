@@ -36,5 +36,5 @@
         }
     },
 
-    "permissions": ["activeTab","contextMenus","storage" ]
+    "permissions": ["contextMenus","storage" ]
 }

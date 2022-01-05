@@ -21,8 +21,8 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
 
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
-  if (info.menuItemId == "gototop") {
-    chrome.tabs.sendMessage(tab.id, { cmd: "gototop" })
+  if (info.menuItemId === "gototop" || info.menuItemId === "gotoBottom") {
+    chrome.tabs.sendMessage(tab.id, { cmd: info.menuItemId })
   }
 })
 
@@ -51,7 +51,19 @@ function onError(error) {
 function init() { 
   chrome.contextMenus.create({
     title: "Goto Top",
-    id: "gototop"
+    id: "root"
+  })
+
+  chrome.contextMenus.create({
+    title: "Top",
+    id: "gototop",
+    parentId: "root"
+  })
+
+  chrome.contextMenus.create({
+    title: "Bottom",
+    id: "gotoBottom",
+    parentId: "root"
   })
 }
 

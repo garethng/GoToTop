@@ -6,5 +6,8 @@
     "extension_description": {
         "message": "无论向上还是向下，一键滚动，随时回到最初的起点，随时来到终点",
         "description": "Description of what the extension does."
+    },
+    "popup_config_hide_all":{
+        "message":"不显示滚动按钮"
     }
 }

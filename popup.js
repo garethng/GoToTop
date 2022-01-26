@@ -27,3 +27,9 @@ chrome.runtime.sendMessage({
     }
     $("#allToggle")[0].checked = item.all
 })
+
+function setupL10N() { 
+    $("label.title-toggle").text(chrome.i18n.getMessage("popup_config_hide_all"))
+}
+
+setupL10N()

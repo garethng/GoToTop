@@ -8,6 +8,6 @@
         "description": "Description of what the extension does."
     },
     "popup_config_hide_all":{
-        "message":"Hide Scroll Control"
+        "message":"Show Scroll Control"
     }
 }

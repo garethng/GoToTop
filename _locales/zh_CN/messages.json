@@ -8,6 +8,6 @@
         "description": "Description of what the extension does."
     },
     "popup_config_hide_all":{
-        "message":"不显示滚动按钮"
+        "message":"显示滚动按钮"
     }
 }

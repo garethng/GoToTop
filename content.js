@@ -1,10 +1,13 @@
+let topButton = $('<div id="gototop" name="myGTTButton" data-testid="back-to-top-button"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;"><path d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"></path></svg></div>')
+let bottomButton = $('<div id="gotoBottom" name="myGTTButton" data-testid="back-to-top-button"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;"><path d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"></path></svg></div>')
+
 window.addEventListener("load", function () {
     chrome.runtime.onMessage.addListener(handleMessage);
     chrome.runtime.sendMessage({
         cmd: "checkStatus",
         domain: document.domain
     }, function (res) {
-        let topButton = $('<div id="gototop" name="myGTTButton" data-testid="back-to-top-button"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;"><path d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"></path></svg></div>')
+        
         topButton.css({
             position: "fixed",
             bottom: "110px",
@@ -21,7 +24,6 @@ window.addEventListener("load", function () {
             "display":"-webkit-flex"
         });
 
-        let bottomButton = $('<div id="gotoBottom" name="myGTTButton" data-testid="back-to-top-button"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="20" width="20" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;"><path d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"></path></svg></div>')
         bottomButton.css({
             position: "fixed",
             bottom: "78px",
@@ -38,6 +40,7 @@ window.addEventListener("load", function () {
             "display":"-webkit-flex",
             transform: "rotate(180deg)"
         })
+        
         $('body').append(bottomButton);
         $('body').append(topButton);
         $('body').on('click', '#gototop', gotoTop);
@@ -93,6 +96,7 @@ function checkStatus(status) {
     if (status) {
         if ($("body").height() > $(window).height()) {
             $("div[name=myGTTButton]").show();
+            bottomButton.hide()
         } else { 
             $("div[name=myGTTButton]").hide();
         }
@@ -101,3 +105,15 @@ function checkStatus(status) {
     }
 }
 
+window.onscroll = function(ev) {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        bottomButton.hide()
+        topButton.show()
+    } else if ((window.scrollY) <= 0) {
+        bottomButton.show()
+        topButton.hide()
+    } else { 
+        bottomButton.show()
+        topButton.show() 
+    }
+};

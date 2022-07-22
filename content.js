@@ -91,8 +91,13 @@ function gotoBottom(){
 
 function checkStatus(status) {
     if (status) {
-        $("div[name=myGTTButton]").show();
+        if ($("body").height() > $(window).height()) {
+            $("div[name=myGTTButton]").show();
+        } else { 
+            $("div[name=myGTTButton]").hide();
+        }
     } else {
         $("div[name=myGTTButton]").hide();
     }
 }
+
